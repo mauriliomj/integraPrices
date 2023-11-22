@@ -11,21 +11,21 @@ import java.util.Optional;
 @Component
 public class PriceDataGatewayMongoImpl implements PriceDataGateway {
 
-  @Autowired
-  private PriceRepository priceRepository;
+    @Autowired
+    private PriceRepository priceRepository;
 
-  @Override
-  public void save(Price price) {
+    @Override
+    public void save(Price price) {
 
-    priceRepository.save(new PriceDocument(price));
+        priceRepository.save(new PriceDocument(price));
 
-  }
+    }
 
-  @Override
-  public Optional<Price> findBySkuAndSellerId(String sku, String sellerId) {
+    @Override
+    public Optional<Price> findBySkuAndSellerId(String sku, String sellerId) {
 
-    return priceRepository.findBySkuAndSellerId(sku, sellerId)
-        .map(PriceDocument::toDomain);
+        return priceRepository.findBySkuAndSellerId(sku, sellerId)
+                .map(PriceDocument::toDomain);
 
-  }
+    }
 }

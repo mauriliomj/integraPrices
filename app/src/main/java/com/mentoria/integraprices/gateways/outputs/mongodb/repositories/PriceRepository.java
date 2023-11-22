@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface PriceRepository extends MongoRepository<PriceDocument, String> {
 
-  public Optional<PriceDocument> findBySkuAndSellerId(String sku, String sellerId);
+    public Optional<PriceDocument> findBySkuAndSellerId(String sku, String sellerId);
 
 }

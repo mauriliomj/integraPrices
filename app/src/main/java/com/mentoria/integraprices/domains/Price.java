@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Price {
 
-  private String sellerId;
-  private String sku;
-  private Integer listPriceInCents;
-  private Integer salePriceInCents;
+    private String sellerId;
+    private String sku;
+    private Integer listPriceInCents;
+    private Integer salePriceInCents;
 
 }

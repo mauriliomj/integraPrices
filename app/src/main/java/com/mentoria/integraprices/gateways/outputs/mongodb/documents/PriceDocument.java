@@ -12,30 +12,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("prices")
 public class PriceDocument {
 
-  @Id
-  private String sku;
-  @Indexed
-  private String sellerId;
-  private Integer listPriceInCents;
-  private Integer salePriceInCents;
+    @Id
+    private String sku;
+    @Indexed
+    private String sellerId;
+    private Integer listPriceInCents;
+    private Integer salePriceInCents;
 
-  public PriceDocument(Price price) {
+    public PriceDocument(Price price){
 
-    this.sku = price.getSku();
-    this.sellerId = price.getSellerId();
-    this.listPriceInCents = price.getListPriceInCents();
-    this.salePriceInCents = price.getSalePriceInCents();
+        this.sku = price.getSku();
+        this.sellerId = price.getSellerId();
+        this.listPriceInCents = price.getListPriceInCents();
+        this.salePriceInCents = price.getSalePriceInCents();
 
-  }
+    }
 
-  public Price toDomain() {
+    public Price toDomain(){
 
-    Price price = new Price();
-    price.setSku(this.sku);
-    price.setSellerId(this.sellerId);
-    price.setListPriceInCents(this.listPriceInCents);
-    price.setSalePriceInCents(this.salePriceInCents);
-    return price;
+        Price price = new Price();
+        price.setSku(this.sku);
+        price.setSellerId(this.sellerId);
+        price.setListPriceInCents(this.listPriceInCents);
+        price.setSalePriceInCents(this.salePriceInCents);
+        return price;
 
-  }
+    }
 }

@@ -7,8 +7,8 @@ import java.util.Optional;
 @Component
 public interface PriceDataGateway {
 
-  void save(Price price);
+    void save(Price price);
 
-  Optional<Price> findBySkuAndSellerId(String sku, String sellerID);
+    Optional<Price> findBySkuAndSellerId(String sku, String sellerID);
 
 }
