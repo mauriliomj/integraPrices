@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UpdatePrice {
 
-    private PriceDataGateway priceDataGateway;
+  private PriceDataGateway priceDataGateway;
 
-    public void execute(String sku, String sellerId, Price updatePrice){
+  public void execute(String sku, String sellerId, Price updatePrice) {
 
-        if(priceDataGateway.findBySkuAndSellerId(sku, sellerId).isEmpty()){
+    if (priceDataGateway.findBySkuAndSellerId(sku, sellerId).isEmpty()) {
 
-            throw new NotFoundException("sku/sellerId não encontrado!");
-
-        }
-
-        priceDataGateway.save(updatePrice);
+      throw new NotFoundException("sku/sellerId não encontrado!");
 
     }
+
+    priceDataGateway.save(updatePrice);
+
+  }
 }

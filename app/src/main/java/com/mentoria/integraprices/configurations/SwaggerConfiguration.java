@@ -14,28 +14,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private static final String BASE_PACKAGE = "com.mentoria.integraprices.gateways.inputs.controllers";
+  private static final String BASE_PACKAGE = "com.mentoria.integraprices.gateways.inputs.controllers";
 
-    @Bean
-    public Docket internal() {
+  @Bean
+  public Docket internal() {
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(BASE_PACKAGE))
-                .paths(PathSelectors.any())
-                .build()
-                .useDefaultResponseMessages(false)
-                .apiInfo(getApiInfo());
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage(BASE_PACKAGE))
+        .paths(PathSelectors.any())
+        .build()
+        .useDefaultResponseMessages(false)
+        .apiInfo(getApiInfo());
 
-    }
+  }
 
-    private ApiInfo getApiInfo(){
+  private ApiInfo getApiInfo() {
 
-        return new ApiInfoBuilder()
-                .title("Integra-Price")
-                .description("App de criação de preços.")
-                .version("1")
-                .build();
+    return new ApiInfoBuilder()
+        .title("Integra-Price")
+        .description("App de criação de preços.")
+        .version("1")
+        .build();
 
-    }
+  }
 }

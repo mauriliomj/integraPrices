@@ -1,10 +1,10 @@
 package com.mentoria.integraprices.exceptions;
 
-public class NotFoundException extends RuntimeException{
+public class NotFoundException extends RuntimeException {
 
-    public NotFoundException(String error){
+  public NotFoundException(String error) {
 
-        super(error);
+    super(error);
 
-    }
+  }
 }

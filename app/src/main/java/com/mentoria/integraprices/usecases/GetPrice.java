@@ -11,17 +11,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GetPrice {
 
-    private PriceDataGateway priceDataGateway;
+  private PriceDataGateway priceDataGateway;
 
-    public Optional<Price> execute(String sku, String sellerId){
+  public Optional<Price> execute(String sku, String sellerId) {
 
-        if(priceDataGateway.findBySkuAndSellerId(sku, sellerId).isEmpty()){
+    if (priceDataGateway.findBySkuAndSellerId(sku, sellerId).isEmpty()) {
 
-            throw new NotFoundException("Sku/sellerId não encontrado!");
-
-        }
-
-        return priceDataGateway.findBySkuAndSellerId(sku, sellerId);
+      throw new NotFoundException("Sku/sellerId não encontrado!");
 
     }
+
+    return priceDataGateway.findBySkuAndSellerId(sku, sellerId);
+
+  }
 }
