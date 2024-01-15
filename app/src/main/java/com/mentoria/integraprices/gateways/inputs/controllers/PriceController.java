@@ -43,7 +43,7 @@ public class PriceController {
   public void updatePriceBySellerId(@PathVariable String sku, @RequestHeader String sellerId,
       @RequestBody PriceRequest priceRequest) {
 
-    updatePrice.execute(sku, sellerId, priceRequest.toDomain(sku, sellerId));
+    updatePrice.execute(priceRequest.toDomain(sku, sellerId));
 
   }
 }

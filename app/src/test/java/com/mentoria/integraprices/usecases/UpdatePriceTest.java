@@ -30,8 +30,7 @@ class UpdatePriceTest {
             priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(), mockPrice().getSellerId()))
         .thenReturn(Optional.of(mockPrice()));
 
-    updatePrice.execute(mockPrice().getSku(),
-        mockPrice().getSellerId(), mockPriceUpdated());
+    updatePrice.execute(mockPriceUpdated());
 
     Mockito.verify(priceDataGateway).save(any());
 
@@ -44,8 +43,7 @@ class UpdatePriceTest {
         .thenThrow(new NotFoundException("Id não encontrado."));
 
     Assertions.assertThrows(NotFoundException.class, () -> updatePrice
-        .execute(mockPrice().getSellerId(), mockPrice().getSku(),
-            mockPriceUpdated()));
+        .execute(mockPriceUpdated()));
 
   }
 

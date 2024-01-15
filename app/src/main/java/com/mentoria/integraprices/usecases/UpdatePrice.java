@@ -12,9 +12,10 @@ public class UpdatePrice {
 
   private PriceDataGateway priceDataGateway;
 
-  public void execute(String sku, String sellerId, Price updatePrice) {
+  public void execute(Price updatePrice) {
 
-    if (priceDataGateway.findBySkuAndSellerId(sku, sellerId).isEmpty()) {
+    if (priceDataGateway.findBySkuAndSellerId(updatePrice.getSku(), updatePrice.getSellerId())
+        .isEmpty()) {
 
       throw new NotFoundException("sku/sellerId não encontrado!");
 
