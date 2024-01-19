@@ -7,5 +7,8 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/prices
 integration:
-  products:
-    url: http//localhost:8086
+  seller:
+    url: http://localhost:8080
+feign:
+  connectionTimeout: 60000
+  readTimeout: 60000
