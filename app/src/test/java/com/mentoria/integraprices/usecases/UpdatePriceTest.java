@@ -11,12 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class UpdatePriceTest {
-
   @InjectMocks
   private UpdatePrice updatePrice;
 
@@ -25,45 +23,39 @@ class UpdatePriceTest {
 
   @Test
   public void shouldChangeAPriceBySkuAndSellerId() {
-
     Mockito.when(
-            priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(), mockPrice().getSellerId()))
+            priceDataGateway.findBySkuAndSellerId(mockPriceUpdated().getSku(), mockPriceUpdated()
+                .getSellerId()))
         .thenReturn(Optional.of(mockPrice()));
 
     updatePrice.execute(mockPriceUpdated());
 
-    Mockito.verify(priceDataGateway).save(any());
-
+    Mockito.verify(priceDataGateway).save(mockPriceUpdated());
   }
 
   @Test
-  public void shouldThrowExceptionForNotFindingId() {
-
-    Mockito.when(priceDataGateway.findBySkuAndSellerId(any(), any()))
+  public void shouldThrowNotFoundException() {
+    Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPriceUpdated().getSku(),
+            mockPriceUpdated().getSellerId()))
         .thenThrow(new NotFoundException("Id não encontrado."));
 
     Assertions.assertThrows(NotFoundException.class, () -> updatePrice
         .execute(mockPriceUpdated()));
-
   }
 
   public Price mockPrice() {
-
     Price mockPrice = new Price();
     mockPrice.setSku("SkuTest");
     mockPrice.setSellerId("IdTest");
     mockPrice.setListPriceInCents(50);
     mockPrice.setSalePriceInCents(40);
     return mockPrice;
-
   }
 
   public Price mockPriceUpdated() {
-
     Price mockPriceUpdated = new Price();
     mockPriceUpdated.setListPriceInCents(120);
     mockPriceUpdated.setSalePriceInCents(90);
     return mockPriceUpdated;
-
   }
 }

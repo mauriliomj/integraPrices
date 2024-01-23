@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class GetPriceTest {
-
   @InjectMocks
   private GetPrice getPrice;
   @Mock
@@ -22,20 +21,22 @@ class GetPriceTest {
 
   @Test
   public void shouldShowAPrice() {
-
     Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(),
         mockPrice().getSellerId())).thenReturn(Optional.of(mockPrice()));
 
     Optional<Price> resultPrice = getPrice
         .execute(mockPrice().getSku(), mockPrice().getSellerId());
 
-    Assertions.assertEquals(resultPrice.get(), mockPrice());
-
+    Assertions.assertEquals(resultPrice.get().getSku(), mockPrice().getSku());
+    Assertions.assertEquals(resultPrice.get().getSellerId(), mockPrice().getSellerId());
+    Assertions.assertEquals(resultPrice.get().getListPriceInCents(), mockPrice()
+        .getListPriceInCents());
+    Assertions.assertEquals(resultPrice.get().getSalePriceInCents(), mockPrice()
+        .getSalePriceInCents());
   }
 
   @Test
   public void shouldThrowAnException() {
-
     Mockito.when(priceDataGateway
             .findBySkuAndSellerId(mockPrice().getSku(), mockPrice().getSellerId()))
         .thenReturn(Optional.empty());
@@ -45,17 +46,14 @@ class GetPriceTest {
 
     Mockito.verify(priceDataGateway).findBySkuAndSellerId(mockPrice().getSku(),
         mockPrice().getSellerId());
-
   }
 
   public Price mockPrice() {
-
     Price mockPrice = new Price();
     mockPrice.setSku("SkuTest");
     mockPrice.setSellerId("IdTest");
     mockPrice.setListPriceInCents(50);
     mockPrice.setSalePriceInCents(40);
     return mockPrice;
-
   }
 }
