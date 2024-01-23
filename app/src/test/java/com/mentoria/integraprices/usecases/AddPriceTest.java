@@ -3,6 +3,7 @@ package com.mentoria.integraprices.usecases;
 import com.mentoria.integraprices.domains.Price;
 import com.mentoria.integraprices.exceptions.AlreadyRegisteredException;
 import com.mentoria.integraprices.gateways.outputs.PriceDataGateway;
+import com.mentoria.integraprices.gateways.outputs.SellersDataGateway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,10 +24,14 @@ class AddPriceTest {
   @Mock
   private PriceDataGateway priceDataGateway;
 
+  @Mock
+  private SellersDataGateway sellersDataGateway;
+
   @Test
   public void shouldSaveAPrice() {
-
     Price priceTest = mockPrice();
+
+    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
 
     Mockito.when(priceDataGateway
             .findBySkuAndSellerId(priceTest.getSku(), priceTest.getSellerId()))
@@ -35,13 +40,14 @@ class AddPriceTest {
     addPrice.execute(mockPrice());
 
     Mockito.verify(priceDataGateway).save(mockPrice());
-
   }
 
   @Test
   public void shouldThrowAnExceptionBySellerId() {
+    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
 
-    Mockito.when(priceDataGateway.findBySkuAndSellerId(any(), any()))
+    Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(),
+            mockPrice().getSellerId()))
         .thenThrow(new AlreadyRegisteredException("Este price já foi cadastrado!"));
 
     Assertions.assertThrows(AlreadyRegisteredException.class,
@@ -51,8 +57,10 @@ class AddPriceTest {
 
   @Test
   public void shouldThrowAnExceptionBySku() {
+    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
 
-    Mockito.when(priceDataGateway.findBySkuAndSellerId(any(), any()))
+    Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(),
+            mockPrice().getSellerId()))
         .thenThrow(new AlreadyRegisteredException("Este price já foi cadastrado!"));
 
     Assertions.assertThrows(AlreadyRegisteredException.class,
