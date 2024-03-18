@@ -12,3 +12,6 @@ integration:
 feign:
   connectionTimeout: 60000
   readTimeout: 60000
+integra-sellers:
+  seller:
+    broadcast: "integra-sellers.seller.broadcast"

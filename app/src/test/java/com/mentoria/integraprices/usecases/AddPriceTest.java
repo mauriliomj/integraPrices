@@ -3,7 +3,6 @@ package com.mentoria.integraprices.usecases;
 import com.mentoria.integraprices.domains.Price;
 import com.mentoria.integraprices.exceptions.AlreadyRegisteredException;
 import com.mentoria.integraprices.gateways.outputs.PriceDataGateway;
-import com.mentoria.integraprices.gateways.outputs.SellersDataGateway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,18 +16,17 @@ import java.util.Optional;
 class AddPriceTest {
   @InjectMocks
   private AddPrice addPrice;
-
   @Mock
   private PriceDataGateway priceDataGateway;
-
   @Mock
-  private SellersDataGateway sellersDataGateway;
+  private CheckSellerId checkSellerId;
 
   @Test
   public void shouldSaveAPrice() {
     Price priceTest = mockPrice();
+    boolean validate = checkSellerId.validate(priceTest.getSellerId());
 
-    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
+    Mockito.when(checkSellerId.validate(priceTest.getSellerId())).thenReturn(true);
 
     Mockito.when(priceDataGateway
             .findBySkuAndSellerId(priceTest.getSku(), priceTest.getSellerId()))
@@ -41,7 +39,7 @@ class AddPriceTest {
 
   @Test
   public void shouldThrowAnExceptionBySellerId() {
-    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
+    Mockito.when(checkSellerId.validate(mockPrice().getSellerId())).thenReturn(true);
 
     Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(),
             mockPrice().getSellerId()))
@@ -53,7 +51,7 @@ class AddPriceTest {
 
   @Test
   public void shouldThrowAnExceptionBySku() {
-    Mockito.when(sellersDataGateway.exists(mockPrice().getSellerId())).thenReturn(true);
+    Mockito.when(checkSellerId.validate(mockPrice().getSellerId())).thenReturn(true);
 
     Mockito.when(priceDataGateway.findBySkuAndSellerId(mockPrice().getSku(),
             mockPrice().getSellerId()))

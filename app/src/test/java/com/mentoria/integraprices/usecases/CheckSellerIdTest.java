@@ -23,7 +23,7 @@ class CheckSellerIdTest {
 
     Mockito.when(sellersDataGateway.exists(sellerIdTest)).thenReturn(true);
 
-    Boolean booleanTest = checkSellerId.validation(sellerIdTest);
+    Boolean booleanTest = checkSellerId.validate(sellerIdTest);
 
     Assertions.assertEquals(booleanTest, true);
   }
@@ -34,7 +34,7 @@ class CheckSellerIdTest {
 
     Mockito.when(sellersDataGateway.exists(sellerIdTest)).thenReturn(false);
 
-    Boolean booleanTest = checkSellerId.validation(sellerIdTest);
+    Boolean booleanTest = checkSellerId.validate(sellerIdTest);
 
     Assertions.assertEquals(booleanTest, false);
   }
