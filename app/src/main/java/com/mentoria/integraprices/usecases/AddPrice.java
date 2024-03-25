@@ -3,6 +3,7 @@ package com.mentoria.integraprices.usecases;
 import com.mentoria.integraprices.domains.Price;
 import com.mentoria.integraprices.exceptions.AlreadyRegisteredException;
 import com.mentoria.integraprices.exceptions.NotFoundException;
+import com.mentoria.integraprices.gateways.outputs.CheckSellerId;
 import com.mentoria.integraprices.gateways.outputs.PriceDataGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

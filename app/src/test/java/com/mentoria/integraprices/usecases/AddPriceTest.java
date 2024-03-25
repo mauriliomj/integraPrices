@@ -2,6 +2,7 @@ package com.mentoria.integraprices.usecases;
 
 import com.mentoria.integraprices.domains.Price;
 import com.mentoria.integraprices.exceptions.AlreadyRegisteredException;
+import com.mentoria.integraprices.gateways.outputs.CheckSellerId;
 import com.mentoria.integraprices.gateways.outputs.PriceDataGateway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,6 @@ class AddPriceTest {
   @Test
   public void shouldSaveAPrice() {
     Price priceTest = mockPrice();
-    boolean validate = checkSellerId.validate(priceTest.getSellerId());
 
     Mockito.when(checkSellerId.validate(priceTest.getSellerId())).thenReturn(true);
 
